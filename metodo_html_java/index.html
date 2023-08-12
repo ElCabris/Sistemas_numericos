@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Conversión Numérica</title>
+</head>
+<body>
+    <h1>Calculadora de Conversión Numérica</h1>
+    <label for="input_number">Número de entrada:</label>
+    <input type="text" id="input_number">
+    
+    <label for="input_base">Base de entrada:</label>
+    <select id="input_base">
+        <option value="dec">Decimal</option>
+        <option value="hex">Hexadecimal</option>
+        <option value="bin">Binario</option>
+        <option value="oct">Octal</option>
+    </select>
+    
+    <label for="output_base">Base de salida:</label>
+    <select id="output_base">
+        <option value="dec">Decimal</option>
+        <option value="hex">Hexadecimal</option>
+        <option value="bin">Binario</option>
+        <option value="oct">Octal</option>
+    </select>
+    
+    <button onclick="convert()">Convertir</button>
+    <p id="result"></p>
+    
+    <script>
+        function convert() {
+            const inputNumber = document.getElementById("input_number").value;
+            const inputBase = document.getElementById("input_base").value;
+            const outputBase = document.getElementById("output_base").value;
+
+            let result;
+            if (inputBase === "dec") {
+                result = parseInt(inputNumber, 10).toString(outputBase === "dec" ? 10 : (outputBase === "hex" ? 16 : (outputBase === "bin" ? 2 : 8)));
+            } else {
+                const decimalNumber = parseInt(inputNumber, inputBase === "hex" ? 16 : (inputBase === "bin" ? 2 : 8));
+                result = decimalNumber.toString(outputBase === "dec" ? 10 : (outputBase === "hex" ? 16 : (outputBase === "bin" ? 2 : 8)));
+            }
+
+            document.getElementById("result").textContent = `Resultado: ${result}`;
+        }
+    </script>
+</body>
+</html>
